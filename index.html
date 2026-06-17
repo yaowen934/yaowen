@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="yaowen botanical personal digital card">
+  <title>yaowen | Botanical Personal Card</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <canvas id="leafCanvas" aria-hidden="true"></canvas>
+  <div class="garden-wash" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="yaowen home">
+      <span class="brand-mark">YW</span>
+      <span data-i18n="brandRole">園藝與繪畫創作者</span>
+    </a>
+
+    <nav class="nav-links" aria-label="主要導覽">
+      <a href="#about" data-i18n="navAbout">關於</a>
+      <a href="#garden" data-i18n="navGarden">互動花園</a>
+      <a href="#work" data-i18n="navWork">作品</a>
+      <a href="#contact" data-i18n="navContact">聯絡</a>
+    </nav>
+
+    <div class="actions">
+      <button class="icon-button" id="themeToggle" type="button" aria-label="切換深淺色主題">
+        <span class="sun" aria-hidden="true"></span>
+        <span class="moon" aria-hidden="true"></span>
+      </button>
+      <button class="pill-button" id="langToggle" type="button">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="heroEyebrow">Botanical Digital Card</p>
+        <h1 data-i18n="heroTitle">yaowen<br>把日常種成一座會呼吸的花園。</h1>
+        <p class="hero-text" data-i18n="heroText">
+          喜歡園藝與繪畫，擅長從葉片紋理、午後光線與生活角落收集靈感，將平凡片刻整理成溫柔、清新、富有設計感的視覺作品。
+        </p>
+        <div class="hero-actions">
+          <a class="primary-link magnetic" href="#garden" data-i18n="ctaGarden">進入互動花園</a>
+          <a class="secondary-link magnetic" href="#contact" data-i18n="ctaContact">與我聯絡</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="植物系主視覺">
+        <div class="portrait-shell">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=86" alt="yaowen 的虛擬肖像">
+          <span class="leaf leaf-a" aria-hidden="true"></span>
+          <span class="leaf leaf-b" aria-hidden="true"></span>
+          <span class="leaf leaf-c" aria-hidden="true"></span>
+          <div class="growth-line" aria-hidden="true"></div>
+          <div class="metric metric-a">
+            <strong>128</strong>
+            <span data-i18n="metricPlants">照顧植物</span>
+          </div>
+          <div class="metric metric-b">
+            <strong>52</strong>
+            <span data-i18n="metricSketches">年度速寫</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="highlight-strip" aria-label="個人統計">
+      <article><span class="stat-number">6+</span><span data-i18n="statYears">年園藝紀錄</span></article>
+      <article><span class="stat-number">300+</span><span data-i18n="statSketches">張手繪草圖</span></article>
+      <article><span class="stat-number">18</span><span data-i18n="statPlants">種香草植物</span></article>
+      <article><span class="stat-number">24</span><span data-i18n="statColors">自然調色盤</span></article>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="aboutEyebrow">About yaowen</p>
+        <h2 data-i18n="aboutTitle">安靜觀察，慢慢栽培，讓顏色自然長出來。</h2>
+      </div>
+      <div class="about-layout">
+        <div class="story-block glass-panel">
+          <h3 data-i18n="bioTitle">個人簡介</h3>
+          <p data-i18n="bioText">
+            yaowen 是一位喜歡把生活整理成圖像的人。週末會整理陽台小花園，替薄荷、迷迭香與多肉植物換盆；平日則用水彩、色鉛筆與數位筆刷記錄季節、天氣與心情。
+          </p>
+          <div class="tag-cloud">
+            <span>園藝</span><span>水彩</span><span>植物筆記</span><span>生活觀察</span><span>自然配色</span>
+          </div>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span>2026</span>
+            <h3 data-i18n="eventOneTitle">建立「窗邊植物日誌」</h3>
+            <p data-i18n="eventOneText">每週記錄植物生長、葉色變化與澆水節奏，累積成一份彩色圖文小誌。</p>
+          </article>
+          <article class="timeline-item">
+            <span>2025</span>
+            <h3 data-i18n="eventTwoTitle">舉辦小型手繪明信片展</h3>
+            <p data-i18n="eventTwoText">以花草、城市角落與午後光影為主題，展出 36 張混合媒材作品。</p>
+          </article>
+          <article class="timeline-item">
+            <span>2024</span>
+            <h3 data-i18n="eventThreeTitle">開始經營創作帳號</h3>
+            <p data-i18n="eventThreeText">分享園藝心得、配色練習與速寫過程，建立溫暖且放鬆的視覺風格。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section garden-section" id="garden">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="gardenEyebrow">Interactive Garden</p>
+        <h2 data-i18n="gardenTitle">點一點，替這座小花園調整光、水與心情。</h2>
+      </div>
+
+      <div class="garden-lab">
+        <div class="plant-stage" aria-live="polite">
+          <div class="plant-pot">
+            <div class="stem stem-a"></div>
+            <div class="stem stem-b"></div>
+            <div class="stem stem-c"></div>
+            <span class="plant-leaf leaf-1"></span>
+            <span class="plant-leaf leaf-2"></span>
+            <span class="plant-leaf leaf-3"></span>
+            <span class="plant-leaf leaf-4"></span>
+          </div>
+          <p id="plantMood" data-i18n="plantMood">目前狀態：晨光、微濕、適合畫一張葉片速寫。</p>
+        </div>
+
+        <div class="garden-controls">
+          <button class="control-card active" type="button" data-garden="morning">
+            <span data-i18n="controlMorningTitle">晨光</span>
+            <small data-i18n="controlMorningText">清新、明亮、葉片舒展</small>
+          </button>
+          <button class="control-card" type="button" data-garden="rain">
+            <span data-i18n="controlRainTitle">雨後</span>
+            <small data-i18n="controlRainText">濕潤、沉靜、顏色更深</small>
+          </button>
+          <button class="control-card" type="button" data-garden="sunset">
+            <span data-i18n="controlSunsetTitle">夕陽</span>
+            <small data-i18n="controlSunsetText">溫暖、柔和、適合水彩</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="palette">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="paletteEyebrow">Living Palette</p>
+        <h2 data-i18n="paletteTitle">選一個自然色票，讓頁面跟著換氣質。</h2>
+      </div>
+      <div class="palette-board" aria-label="互動色票">
+        <button class="swatch active" type="button" data-palette="fern"><span></span><b data-i18n="swatchFern">蕨葉綠</b></button>
+        <button class="swatch" type="button" data-palette="mint"><span></span><b data-i18n="swatchMint">薄荷晨霧</b></button>
+        <button class="swatch" type="button" data-palette="moss"><span></span><b data-i18n="swatchMoss">苔蘚深林</b></button>
+        <button class="swatch" type="button" data-palette="citrus"><span></span><b data-i18n="swatchCitrus">柑橘花房</b></button>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="workEyebrow">Selected Works</p>
+        <h2 data-i18n="workTitle">作品像花園一樣，有層次、有季節，也有一點任性。</h2>
+      </div>
+      <div class="filter-bar" aria-label="作品篩選">
+        <button class="filter-button active" type="button" data-filter="all" data-i18n="filterAll">全部</button>
+        <button class="filter-button" type="button" data-filter="painting" data-i18n="filterPainting">繪畫</button>
+        <button class="filter-button" type="button" data-filter="garden" data-i18n="filterGarden">園藝</button>
+        <button class="filter-button" type="button" data-filter="journal" data-i18n="filterJournal">筆記</button>
+      </div>
+      <div class="work-grid">
+        <article class="work-card" data-kind="painting">
+          <img src="https://images.unsplash.com/photo-1461344577544-4e5dc9487184?auto=format&fit=crop&w=900&q=84" alt="繪畫顏料與筆刷">
+          <div>
+            <span data-i18n="projectOneType">繪畫系列</span>
+            <h3 data-i18n="projectOneTitle">Herbarium Dreams</h3>
+            <p data-i18n="projectOneText">以植物標本為靈感的水彩系列，融合真實葉片輪廓與夢境般的色塊。</p>
+          </div>
+        </article>
+        <article class="work-card" data-kind="garden">
+          <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=900&q=84" alt="盆栽植物">
+          <div>
+            <span data-i18n="projectTwoType">園藝紀錄</span>
+            <h3 data-i18n="projectTwoTitle">Balcony Seasons</h3>
+            <p data-i18n="projectTwoText">用照片、手繪與短文記錄陽台從春天到冬天的植物變化。</p>
+          </div>
+        </article>
+        <article class="work-card" data-kind="journal">
+          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=84" alt="畫筆與創作桌面">
+          <div>
+            <span data-i18n="projectThreeType">生活插畫</span>
+            <h3 data-i18n="projectThreeTitle">Quiet Corners</h3>
+            <p data-i18n="projectThreeText">描繪窗台、書桌、茶杯與花瓶，讓日常角落變成溫柔的視覺故事。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="servicesEyebrow">What I Can Do</p>
+        <h2 data-i18n="servicesTitle">可以一起完成的事情。</h2>
+      </div>
+      <div class="service-grid">
+        <article class="service-card">
+          <span>01</span>
+          <h3 data-i18n="serviceOneTitle">手繪風格視覺</h3>
+          <p data-i18n="serviceOneText">為個人品牌、卡片、貼文或小型活動設計柔和清新的插畫視覺。</p>
+        </article>
+        <article class="service-card">
+          <span>02</span>
+          <h3 data-i18n="serviceTwoTitle">植物主題內容</h3>
+          <p data-i18n="serviceTwoText">整理園藝筆記、植物照護小知識與季節性內容企劃。</p>
+        </article>
+        <article class="service-card">
+          <span>03</span>
+          <h3 data-i18n="serviceThreeTitle">綠意系網頁名片</h3>
+          <p data-i18n="serviceThreeText">規劃帶有自然色彩、故事與互動感的個人介紹頁面。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="contact-panel">
+        <div>
+          <p class="eyebrow" data-i18n="contactEyebrow">Contact</p>
+          <h2 data-i18n="contactTitle">一起把下一個日常種亮。</h2>
+          <p data-i18n="contactText">歡迎聊插畫、植物、內容合作、個人網站，或任何想變得更有生命力的小計畫。</p>
+        </div>
+        <div class="contact-list">
+          <a class="contact-link magnetic" href="mailto:hello@yaowen.example">hello@yaowen.example</a>
+          <a class="contact-link magnetic" href="#">Instagram / @yaowen.garden</a>
+          <a class="contact-link magnetic" href="#">Threads / @yaowen.paint</a>
+          <a class="contact-link magnetic" href="#">Pinterest / yaowen-notes</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span data-i18n="footerText">© 2026 yaowen。虛構延伸內容，為電子名片範例。</span>
+  </footer>
+</body>
+</html>
