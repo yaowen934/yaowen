@@ -1,249 +1,139 @@
-<!doctype html>
-<html lang="zh-Hant" data-theme="light">
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="yaowen botanical personal digital card">
-  <title>yaowen | Botanical Personal Card</title>
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="stylesheet" href="style.css">
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script defer src="script.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyHealth Passport｜多國語言隨身電子病歷</title>
+<style>
+:root{
+  --bg:#07111f;--panel:rgba(15,30,49,.82);--panel2:#12253c;
+  --text:#eef7ff;--muted:#9fb3c8;--line:rgba(255,255,255,.1);
+  --accent:#54d7c7;--accent2:#6da8ff;--danger:#ff6f83;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,"Noto Sans TC","Microsoft JhengHei",sans-serif;background:
+radial-gradient(circle at 10% 10%,#173a55 0,transparent 30%),
+radial-gradient(circle at 90% 0,#1c315e 0,transparent 28%),var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}.app{max-width:1440px;margin:auto;padding:28px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:14px}.logo{width:50px;height:50px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));font-size:25px;box-shadow:0 12px 35px #0006}.brand h1{font-size:1.35rem;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:.88rem}
+.actions{display:flex;gap:10px;align-items:center}.lang,.iconbtn,.primary,.secondary{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:12px;padding:10px 13px;cursor:pointer}.primary{background:linear-gradient(135deg,var(--accent),#3f94ff);color:#05131d;border:none;font-weight:800}.secondary{background:transparent}.layout{display:grid;grid-template-columns:290px 1fr;gap:24px}
+.sidebar,.card,.hero{background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(18px);box-shadow:0 20px 60px #0003}
+.sidebar{border-radius:24px;padding:18px;height:max-content;position:sticky;top:20px}.profile{text-align:center;padding:12px}.avatar{width:90px;height:90px;margin:auto;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#6da8ff,#54d7c7);font-size:2rem;font-weight:800}.profile h2{margin:12px 0 4px}.profile small{color:var(--muted)}
+.nav{margin-top:16px}.nav button{width:100%;text-align:left;background:transparent;border:0;color:var(--muted);padding:13px;border-radius:12px;margin:3px 0;cursor:pointer}.nav button.active,.nav button:hover{background:#ffffff12;color:white}.emergency{margin-top:14px;padding:15px;border-radius:16px;background:linear-gradient(135deg,#3c1823,#251721);border:1px solid #ff6f8355}.emergency strong{color:#ff9cab}
+.hero{border-radius:28px;padding:30px;display:grid;grid-template-columns:1.4fr .9fr;gap:24px;background:linear-gradient(135deg,#17334b99,#101b3199)}.badge{display:inline-flex;padding:7px 11px;border-radius:999px;background:#54d7c722;color:#72eadc;font-size:.82rem}.hero h2{font-size:clamp(1.7rem,4vw,3rem);margin:14px 0 10px}.hero p{color:var(--muted);line-height:1.7}.idbox{align-self:center;background:#06111dbb;padding:22px;border-radius:22px}.idrow{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);color:var(--muted)}.idrow b{color:white}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin:28px 0 14px}.section-head h3{margin:0;font-size:1.3rem}.section-head span{color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border-radius:22px;padding:20px}.card h4{margin:0 0 12px;font-size:1rem}.card p,.item{color:var(--muted);line-height:1.65}.card ul{padding-left:18px;color:var(--muted);line-height:1.8}.tag{display:inline-block;padding:5px 9px;background:#ffffff0d;border-radius:999px;margin:4px 3px 0 0;font-size:.8rem}.danger{color:#ff91a0}.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.wide{grid-column:span 2}
+.record-list{display:grid;gap:10px}.record{padding:13px;border-radius:14px;background:#ffffff08;border:1px solid #ffffff0b}.record b{display:block;color:white}.record small{color:var(--muted)}
+.empty{display:none}.notice{font-size:.82rem;color:var(--muted);margin-top:18px}
+@media(max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:relative;top:auto}.nav{display:flex;overflow:auto}.nav button{min-width:max-content}.grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}.wide{grid-column:span 2}}
+@media(max-width:620px){.app{padding:15px}.topbar{align-items:flex-start}.actions{flex-wrap:wrap;justify-content:flex-end}.brand p{display:none}.grid,.info-grid{grid-template-columns:1fr}.wide{grid-column:span 1}.hero{padding:22px}.sidebar{padding:12px}}
+@media print{body{background:white;color:#111}.sidebar,.actions,.nav{display:none}.layout{display:block}.hero,.card{box-shadow:none;background:white;color:#111;border-color:#ddd}.hero p,.card p,.item,.record small,.section-head span{color:#555}.idrow b,.record b{color:#111}.app{max-width:none}.notice{display:none}}
+</style>
 </head>
 <body>
-  <canvas id="leafCanvas" aria-hidden="true"></canvas>
-  <div class="garden-wash" aria-hidden="true"></div>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="logo">✚</div><div><h1>MyHealth Passport</h1><p data-i18n="subtitle">多國語言・隨身電子病歷</p></div></div>
+  <div class="actions">
+    <select id="language" class="lang" aria-label="Language">
+      <option value="zh">繁體中文</option><option value="en">English</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="vi">Tiếng Việt</option>
+    </select>
+    <button class="iconbtn" onclick="window.print()" data-i18n="print">列印</button>
+    <button class="primary" onclick="alert(t('saved'))" data-i18n="share">分享緊急資訊</button>
+  </div>
+</header>
 
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="yaowen home">
-      <span class="brand-mark">YW</span>
-      <span data-i18n="brandRole">園藝與繪畫創作者</span>
-    </a>
+<div class="layout">
+<aside class="sidebar">
+ <div class="profile"><div class="avatar">Y</div><h2 id="patientName">王小明</h2><small data-i18n="patient">個人健康檔案</small></div>
+ <nav class="nav">
+  <button class="active" data-target="overview" data-i18n="navOverview">總覽</button>
+  <button data-target="medical" data-i18n="navMedical">病史</button>
+  <button data-target="medication" data-i18n="navMedication">用藥</button>
+  <button data-target="records" data-i18n="navRecords">醫療紀錄</button>
+  <button data-target="emergency" data-i18n="navEmergency">緊急資訊</button>
+ </nav>
+ <div class="emergency"><strong data-i18n="emergencyTitle">⚠ 緊急資訊</strong><div class="item" data-i18n="emergencyText">請優先查看過敏、慢性病、用藥與緊急聯絡人。</div></div>
+</aside>
 
-    <nav class="nav-links" aria-label="主要導覽">
-      <a href="#about" data-i18n="navAbout">關於</a>
-      <a href="#garden" data-i18n="navGarden">互動花園</a>
-      <a href="#work" data-i18n="navWork">作品</a>
-      <a href="#contact" data-i18n="navContact">聯絡</a>
-    </nav>
+<main>
+<section id="overview">
+ <div class="hero">
+  <div><span class="badge" data-i18n="verified">● Personal Health Passport</span><h2 data-i18n="welcome">你的健康資訊，跨語言隨身同行。</h2><p data-i18n="heroText">將重要醫療資訊整合成單一數位檔案，方便醫療人員在不同國家快速理解你的健康狀況。</p><button class="secondary" onclick="document.getElementById('emergency').scrollIntoView({behavior:'smooth'})" data-i18n="viewEmergency">查看緊急資訊</button></div>
+  <div class="idbox">
+   <div class="idrow"><span data-i18n="blood">血型</span><b>O+</b></div>
+   <div class="idrow"><span data-i18n="allergy">嚴重過敏</span><b class="danger">Penicillin</b></div>
+   <div class="idrow"><span data-i18n="languageLabel">目前語言</span><b id="currentLanguage">繁體中文</b></div>
+   <div class="idrow"><span data-i18n="updated">最後更新</span><b>2026-08-15</b></div>
+  </div>
+ </div>
 
-    <div class="actions">
-      <button class="icon-button" id="themeToggle" type="button" aria-label="切換深淺色主題">
-        <span class="sun" aria-hidden="true"></span>
-        <span class="moon" aria-hidden="true"></span>
-      </button>
-      <button class="pill-button" id="langToggle" type="button">EN</button>
-    </div>
-  </header>
+ <div class="section-head"><h3 data-i18n="healthSummary">健康摘要</h3><span data-i18n="summaryHint">可快速供醫師閱讀</span></div>
+ <div class="grid">
+  <article class="card"><h4>🫀 <span data-i18n="chronic">慢性疾病</span></h4><div class="item">Hypertension</div><div class="item">Type 2 Diabetes</div></article>
+  <article class="card"><h4>💊 <span data-i18n="currentMed">目前用藥</span></h4><div class="item">Metformin 500 mg</div><div class="item">Amlodipine 5 mg</div></article>
+  <article class="card"><h4>🧬 <span data-i18n="familyRisk">家族風險</span></h4><div class="item" data-i18n="familyValue">糖尿病、高血壓</div></article>
+ </div>
+</section>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-copy">
-        <p class="eyebrow" data-i18n="heroEyebrow">Botanical Digital Card</p>
-        <h1 data-i18n="heroTitle">yaowen<br>把日常種成一座會呼吸的花園。</h1>
-        <p class="hero-text" data-i18n="heroText">
-          喜歡園藝與繪畫，擅長從葉片紋理、午後光線與生活角落收集靈感，將平凡片刻整理成溫柔、清新、富有設計感的視覺作品。
-        </p>
-        <div class="hero-actions">
-          <a class="primary-link magnetic" href="#garden" data-i18n="ctaGarden">進入互動花園</a>
-          <a class="secondary-link magnetic" href="#contact" data-i18n="ctaContact">與我聯絡</a>
-        </div>
-      </div>
+<section id="medical">
+ <div class="section-head"><h3 data-i18n="medicalTitle">完整健康資訊</h3><span data-i18n="medicalHint">建議依醫療文件定期更新</span></div>
+ <div class="info-grid">
+  <article class="card"><h4 data-i18n="personalInfo">個人基本資料</h4><ul><li data-i18n="demoPersonal">姓名、出生日期、生理性別、國籍</li><li data-i18n="demoContact">電話、住址、緊急聯絡人</li><li data-i18n="demoIdentity">護照／保險資訊（可選）</li></ul></article>
+  <article class="card"><h4 data-i18n="allergyTitle">過敏與不耐症</h4><p><b class="danger">Penicillin</b> — Rash / Skin reaction</p><p data-i18n="allergyNote">可記錄藥物、食物、乳膠與其他過敏原及反應。</p></article>
+  <article class="card"><h4 data-i18n="diseaseHistory">疾病史／診斷史</h4><p>Hypertension (2022)</p><p>Type 2 Diabetes (2024)</p></article>
+  <article class="card"><h4 data-i18n="surgeryHistory">手術與住院史</h4><p>Appendectomy — 2018</p><p data-i18n="hospitalNote">可補充手術日期、醫院、麻醉或併發症。</p></article>
+  <article class="card"><h4 data-i18n="familyHistory">家族病史</h4><p data-i18n="familyDetail">父母、祖父母、兄弟姊妹的重要疾病，例如心血管疾病、癌症、糖尿病。</p></article>
+  <article class="card"><h4 data-i18n="socialHistory">生活與社會史</h4><p data-i18n="socialDetail">吸菸、飲酒、運動、職業、睡眠，以及其他可能影響醫療照護的資訊。</p></article>
+  <article class="card wide"><h4 data-i18n="extraTitle">其他建議納入的健康資訊</h4>
+   <span class="tag" data-i18n="vaccine">疫苗接種</span><span class="tag" data-i18n="pregnancy">妊娠／生育史</span><span class="tag" data-i18n="mental">心理健康史</span><span class="tag" data-i18n="device">植入物／醫療器材</span><span class="tag" data-i18n="transfusion">輸血史</span><span class="tag" data-i18n="organ">器官捐贈意願</span><span class="tag" data-i18n="advance">預立醫療決定</span><span class="tag" data-i18n="baseline">身高／體重／生命徵象</span><span class="tag" data-i18n="tests">重要檢查結果</span>
+  </article>
+ </div>
+</section>
 
-      <div class="hero-visual" aria-label="植物系主視覺">
-        <div class="portrait-shell">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=86" alt="yaowen 的虛擬肖像">
-          <span class="leaf leaf-a" aria-hidden="true"></span>
-          <span class="leaf leaf-b" aria-hidden="true"></span>
-          <span class="leaf leaf-c" aria-hidden="true"></span>
-          <div class="growth-line" aria-hidden="true"></div>
-          <div class="metric metric-a">
-            <strong>128</strong>
-            <span data-i18n="metricPlants">照顧植物</span>
-          </div>
-          <div class="metric metric-b">
-            <strong>52</strong>
-            <span data-i18n="metricSketches">年度速寫</span>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="medication">
+ <div class="section-head"><h3 data-i18n="medTitle">用藥與醫療紀錄</h3><span data-i18n="medHint">避免重複或錯誤用藥</span></div>
+ <div class="grid">
+  <article class="card"><h4 data-i18n="currentMedication">目前固定用藥</h4><div class="record-list"><div class="record"><b>Metformin 500 mg</b><small>Oral · Twice daily</small></div><div class="record"><b>Amlodipine 5 mg</b><small>Oral · Once daily</small></div></div></article>
+  <article class="card"><h4 data-i18n="medFields">建議欄位</h4><ul><li data-i18n="medField1">藥名、劑量、頻率、用途</li><li data-i18n="medField2">開始／停止日期與原因</li><li data-i18n="medField3">非處方藥、保健食品與中草藥</li></ul></article>
+  <article class="card"><h4 data-i18n="doctorInfo">醫療團隊</h4><p data-i18n="doctorDetail">主治醫師、專科醫師、藥師與醫療院所聯絡資訊。</p></article>
+ </div>
+</section>
 
-    <section class="highlight-strip" aria-label="個人統計">
-      <article><span class="stat-number">6+</span><span data-i18n="statYears">年園藝紀錄</span></article>
-      <article><span class="stat-number">300+</span><span data-i18n="statSketches">張手繪草圖</span></article>
-      <article><span class="stat-number">18</span><span data-i18n="statPlants">種香草植物</span></article>
-      <article><span class="stat-number">24</span><span data-i18n="statColors">自然調色盤</span></article>
-    </section>
+<section id="records">
+ <div class="section-head"><h3 data-i18n="recordTitle">重要醫療紀錄</h3><span data-i18n="recordHint">可依日期建立時間軸</span></div>
+ <div class="record-list">
+  <div class="record"><b>2026-07-20 — Health Check-up</b><small data-i18n="record1">年度健康檢查：可連結或摘要重要數值。</small></div>
+  <div class="record"><b>2025-11-08 — Vaccination</b><small data-i18n="record2">疫苗名稱、日期、批號與接種院所。</small></div>
+  <div class="record"><b>2024-03-15 — Diabetes Diagnosis</b><small data-i18n="record3">診斷、治療計畫與後續追蹤。</small></div>
+ </div>
+</section>
 
-    <section class="section" id="about">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="aboutEyebrow">About yaowen</p>
-        <h2 data-i18n="aboutTitle">安靜觀察，慢慢栽培，讓顏色自然長出來。</h2>
-      </div>
-      <div class="about-layout">
-        <div class="story-block glass-panel">
-          <h3 data-i18n="bioTitle">個人簡介</h3>
-          <p data-i18n="bioText">
-            yaowen 是一位喜歡把生活整理成圖像的人。週末會整理陽台小花園，替薄荷、迷迭香與多肉植物換盆；平日則用水彩、色鉛筆與數位筆刷記錄季節、天氣與心情。
-          </p>
-          <div class="tag-cloud">
-            <span>園藝</span><span>水彩</span><span>植物筆記</span><span>生活觀察</span><span>自然配色</span>
-          </div>
-        </div>
-        <div class="timeline">
-          <article class="timeline-item">
-            <span>2026</span>
-            <h3 data-i18n="eventOneTitle">建立「窗邊植物日誌」</h3>
-            <p data-i18n="eventOneText">每週記錄植物生長、葉色變化與澆水節奏，累積成一份彩色圖文小誌。</p>
-          </article>
-          <article class="timeline-item">
-            <span>2025</span>
-            <h3 data-i18n="eventTwoTitle">舉辦小型手繪明信片展</h3>
-            <p data-i18n="eventTwoText">以花草、城市角落與午後光影為主題，展出 36 張混合媒材作品。</p>
-          </article>
-          <article class="timeline-item">
-            <span>2024</span>
-            <h3 data-i18n="eventThreeTitle">開始經營創作帳號</h3>
-            <p data-i18n="eventThreeText">分享園藝心得、配色練習與速寫過程，建立溫暖且放鬆的視覺風格。</p>
-          </article>
-        </div>
-      </div>
-    </section>
+<section id="emergency">
+ <div class="section-head"><h3 data-i18n="emergencySection">緊急醫療卡</h3><span data-i18n="emergencyHint">建議放在首頁並可快速分享</span></div>
+ <div class="info-grid">
+  <article class="card"><h4>🚨 <span data-i18n="critical">關鍵資訊</span></h4><p><b data-i18n="blood">血型</b>: O+</p><p><b data-i18n="allergy">嚴重過敏</b>: <span class="danger">Penicillin</span></p><p><b data-i18n="conditions">重要疾病</b>: Hypertension, Type 2 Diabetes</p></article>
+  <article class="card"><h4>📞 <span data-i18n="emergencyContact">緊急聯絡人</span></h4><p><b>陳小華 / Jane Chen</b></p><p>+886 912 345 678</p><p data-i18n="relationship">關係：家人</p></article>
+ </div>
+ <p class="notice" data-i18n="privacy">隱私提醒：正式上線時，不建議把完整身分證號、住址或敏感醫療資料直接公開在無保護的靜態網站中；應加入登入、加密與存取權限。</p>
+</section>
+</main>
+</div>
+</div>
 
-    <section class="section garden-section" id="garden">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="gardenEyebrow">Interactive Garden</p>
-        <h2 data-i18n="gardenTitle">點一點，替這座小花園調整光、水與心情。</h2>
-      </div>
-
-      <div class="garden-lab">
-        <div class="plant-stage" aria-live="polite">
-          <div class="plant-pot">
-            <div class="stem stem-a"></div>
-            <div class="stem stem-b"></div>
-            <div class="stem stem-c"></div>
-            <span class="plant-leaf leaf-1"></span>
-            <span class="plant-leaf leaf-2"></span>
-            <span class="plant-leaf leaf-3"></span>
-            <span class="plant-leaf leaf-4"></span>
-          </div>
-          <p id="plantMood" data-i18n="plantMood">目前狀態：晨光、微濕、適合畫一張葉片速寫。</p>
-        </div>
-
-        <div class="garden-controls">
-          <button class="control-card active" type="button" data-garden="morning">
-            <span data-i18n="controlMorningTitle">晨光</span>
-            <small data-i18n="controlMorningText">清新、明亮、葉片舒展</small>
-          </button>
-          <button class="control-card" type="button" data-garden="rain">
-            <span data-i18n="controlRainTitle">雨後</span>
-            <small data-i18n="controlRainText">濕潤、沉靜、顏色更深</small>
-          </button>
-          <button class="control-card" type="button" data-garden="sunset">
-            <span data-i18n="controlSunsetTitle">夕陽</span>
-            <small data-i18n="controlSunsetText">溫暖、柔和、適合水彩</small>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="palette">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="paletteEyebrow">Living Palette</p>
-        <h2 data-i18n="paletteTitle">選一個自然色票，讓頁面跟著換氣質。</h2>
-      </div>
-      <div class="palette-board" aria-label="互動色票">
-        <button class="swatch active" type="button" data-palette="fern"><span></span><b data-i18n="swatchFern">蕨葉綠</b></button>
-        <button class="swatch" type="button" data-palette="mint"><span></span><b data-i18n="swatchMint">薄荷晨霧</b></button>
-        <button class="swatch" type="button" data-palette="moss"><span></span><b data-i18n="swatchMoss">苔蘚深林</b></button>
-        <button class="swatch" type="button" data-palette="citrus"><span></span><b data-i18n="swatchCitrus">柑橘花房</b></button>
-      </div>
-    </section>
-
-    <section class="section" id="work">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="workEyebrow">Selected Works</p>
-        <h2 data-i18n="workTitle">作品像花園一樣，有層次、有季節，也有一點任性。</h2>
-      </div>
-      <div class="filter-bar" aria-label="作品篩選">
-        <button class="filter-button active" type="button" data-filter="all" data-i18n="filterAll">全部</button>
-        <button class="filter-button" type="button" data-filter="painting" data-i18n="filterPainting">繪畫</button>
-        <button class="filter-button" type="button" data-filter="garden" data-i18n="filterGarden">園藝</button>
-        <button class="filter-button" type="button" data-filter="journal" data-i18n="filterJournal">筆記</button>
-      </div>
-      <div class="work-grid">
-        <article class="work-card" data-kind="painting">
-          <img src="https://images.unsplash.com/photo-1461344577544-4e5dc9487184?auto=format&fit=crop&w=900&q=84" alt="繪畫顏料與筆刷">
-          <div>
-            <span data-i18n="projectOneType">繪畫系列</span>
-            <h3 data-i18n="projectOneTitle">Herbarium Dreams</h3>
-            <p data-i18n="projectOneText">以植物標本為靈感的水彩系列，融合真實葉片輪廓與夢境般的色塊。</p>
-          </div>
-        </article>
-        <article class="work-card" data-kind="garden">
-          <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=900&q=84" alt="盆栽植物">
-          <div>
-            <span data-i18n="projectTwoType">園藝紀錄</span>
-            <h3 data-i18n="projectTwoTitle">Balcony Seasons</h3>
-            <p data-i18n="projectTwoText">用照片、手繪與短文記錄陽台從春天到冬天的植物變化。</p>
-          </div>
-        </article>
-        <article class="work-card" data-kind="journal">
-          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=84" alt="畫筆與創作桌面">
-          <div>
-            <span data-i18n="projectThreeType">生活插畫</span>
-            <h3 data-i18n="projectThreeTitle">Quiet Corners</h3>
-            <p data-i18n="projectThreeText">描繪窗台、書桌、茶杯與花瓶，讓日常角落變成溫柔的視覺故事。</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="services">
-      <div class="section-heading">
-        <p class="eyebrow" data-i18n="servicesEyebrow">What I Can Do</p>
-        <h2 data-i18n="servicesTitle">可以一起完成的事情。</h2>
-      </div>
-      <div class="service-grid">
-        <article class="service-card">
-          <span>01</span>
-          <h3 data-i18n="serviceOneTitle">手繪風格視覺</h3>
-          <p data-i18n="serviceOneText">為個人品牌、卡片、貼文或小型活動設計柔和清新的插畫視覺。</p>
-        </article>
-        <article class="service-card">
-          <span>02</span>
-          <h3 data-i18n="serviceTwoTitle">植物主題內容</h3>
-          <p data-i18n="serviceTwoText">整理園藝筆記、植物照護小知識與季節性內容企劃。</p>
-        </article>
-        <article class="service-card">
-          <span>03</span>
-          <h3 data-i18n="serviceThreeTitle">綠意系網頁名片</h3>
-          <p data-i18n="serviceThreeText">規劃帶有自然色彩、故事與互動感的個人介紹頁面。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section contact-section" id="contact">
-      <div class="contact-panel">
-        <div>
-          <p class="eyebrow" data-i18n="contactEyebrow">Contact</p>
-          <h2 data-i18n="contactTitle">一起把下一個日常種亮。</h2>
-          <p data-i18n="contactText">歡迎聊插畫、植物、內容合作、個人網站，或任何想變得更有生命力的小計畫。</p>
-        </div>
-        <div class="contact-list">
-          <a class="contact-link magnetic" href="mailto:hello@yaowen.example">hello@yaowen.example</a>
-          <a class="contact-link magnetic" href="#">Instagram / @yaowen.garden</a>
-          <a class="contact-link magnetic" href="#">Threads / @yaowen.paint</a>
-          <a class="contact-link magnetic" href="#">Pinterest / yaowen-notes</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <span data-i18n="footerText">© 2026 yaowen。虛構延伸內容，為電子名片範例。</span>
-  </footer>
-</body>
-</html>
+<script>
+const translations={
+zh:{subtitle:"多國語言・隨身電子病歷",print:"列印",share:"分享緊急資訊",patient:"個人健康檔案",navOverview:"總覽",navMedical:"病史",navMedication:"用藥",navRecords:"醫療紀錄",navEmergency:"緊急資訊",emergencyTitle:"⚠ 緊急資訊",emergencyText:"請優先查看過敏、慢性病、用藥與緊急聯絡人。",verified:"● 個人健康護照",welcome:"你的健康資訊，跨語言隨身同行。",heroText:"將重要醫療資訊整合成單一數位檔案，方便醫療人員在不同國家快速理解你的健康狀況。",viewEmergency:"查看緊急資訊",blood:"血型",allergy:"嚴重過敏",languageLabel:"目前語言",updated:"最後更新",healthSummary:"健康摘要",summaryHint:"可快速供醫師閱讀",chronic:"慢性疾病",currentMed:"目前用藥",familyRisk:"家族風險",familyValue:"糖尿病、高血壓",medicalTitle:"完整健康資訊",medicalHint:"建議依醫療文件定期更新",personalInfo:"個人基本資料",demoPersonal:"姓名、出生日期、生理性別、國籍",demoContact:"電話、住址、緊急聯絡人",demoIdentity:"護照／保險資訊（可選）",allergyTitle:"過敏與不耐症",allergyNote:"可記錄藥物、食物、乳膠與其他過敏原及反應。",diseaseHistory:"疾病史／診斷史",surgeryHistory:"手術與住院史",hospitalNote:"可補充手術日期、醫院、麻醉或併發症。",familyHistory:"家族病史",familyDetail:"父母、祖父母、兄弟姊妹的重要疾病，例如心血管疾病、癌症、糖尿病。",socialHistory:"生活與社會史",socialDetail:"吸菸、飲酒、運動、職業、睡眠，以及其他可能影響醫療照護的資訊。",extraTitle:"其他建議納入的健康資訊",vaccine:"疫苗接種",pregnancy:"妊娠／生育史",mental:"心理健康史",device:"植入物／醫療器材",transfusion:"輸血史",organ:"器官捐贈意願",advance:"預立醫療決定",baseline:"身高／體重／生命徵象",tests:"重要檢查結果",medTitle:"用藥與醫療紀錄",medHint:"避免重複或錯誤用藥",currentMedication:"目前固定用藥",medFields:"建議欄位",medField1:"藥名、劑量、頻率、用途",medField2:"開始／停止日期與原因",medField3:"非處方藥、保健食品與中草藥",doctorInfo:"醫療團隊",doctorDetail:"主治醫師、專科醫師、藥師與醫療院所聯絡資訊。",recordTitle:"重要醫療紀錄",recordHint:"可依日期建立時間軸",record1:"年度健康檢查：可連結或摘要重要數值。",record2:"疫苗名稱、日期、批號與接種院所。",record3:"診斷、治療計畫與後續追蹤。",emergencySection:"緊急醫療卡",emergencyHint:"建議放在首頁並可快速分享",critical:"關鍵資訊",conditions:"重要疾病",emergencyContact:"緊急聯絡人",relationship:"關係：家人",privacy:"隱私提醒：正式上線時，不建議把完整身分證號、住址或敏感醫療資料直接公開在無保護的靜態網站中；應加入登入、加密與存取權限。",saved:"緊急資訊已準備好！"},
+en:{subtitle:"Multilingual Personal Health Record",print:"Print",share:"Share Emergency Info",patient:"Personal Health Profile",navOverview:"Overview",navMedical:"Medical History",navMedication:"Medication",navRecords:"Records",navEmergency:"Emergency",emergencyTitle:"⚠ Emergency Information",emergencyText:"Check allergies, conditions, medications and emergency contacts first.",verified:"● Personal Health Passport",welcome:"Your health information, always with you across languages.",heroText:"A single digital profile that helps healthcare professionals quickly understand your health status in different countries.",viewEmergency:"View Emergency Info",blood:"Blood Type",allergy:"Severe Allergy",languageLabel:"Current Language",updated:"Last Updated",healthSummary:"Health Summary",summaryHint:"Quick overview for clinicians",chronic:"Chronic Conditions",currentMed:"Current Medication",familyRisk:"Family Risk",familyValue:"Diabetes, Hypertension",medicalTitle:"Complete Health Information",medicalHint:"Update regularly using official medical documents",personalInfo:"Personal Information",demoPersonal:"Name, date of birth, biological sex, nationality",demoContact:"Phone, address, emergency contact",demoIdentity:"Passport / insurance information (optional)",allergyTitle:"Allergies & Intolerances",allergyNote:"Record drug, food, latex and other allergens with reactions.",diseaseHistory:"Medical / Diagnosis History",surgeryHistory:"Surgery & Hospitalization",hospitalNote:"Add dates, hospital, anesthesia and complications.",familyHistory:"Family Medical History",familyDetail:"Important conditions among parents, grandparents and siblings, such as cardiovascular disease, cancer or diabetes.",socialHistory:"Lifestyle & Social History",socialDetail:"Smoking, alcohol, exercise, occupation, sleep and other factors relevant to care.",extraTitle:"Other Recommended Health Information",vaccine:"Vaccinations",pregnancy:"Pregnancy / Reproductive History",mental:"Mental Health History",device:"Implants / Medical Devices",transfusion:"Transfusion History",organ:"Organ Donation Preference",advance:"Advance Medical Decision",baseline:"Height / Weight / Vital Signs",tests:"Important Test Results",medTitle:"Medication & Medical Records",medHint:"Help prevent duplicate or incorrect medication",currentMedication:"Current Regular Medication",medFields:"Recommended Fields",medField1:"Name, dose, frequency, purpose",medField2:"Start / stop date and reason",medField3:"OTC medicine, supplements and herbal products",doctorInfo:"Healthcare Team",doctorDetail:"Physicians, specialists, pharmacists and healthcare facilities.",recordTitle:"Important Medical Records",recordHint:"Build a timeline by date",record1:"Annual health check-up: link or summarize key results.",record2:"Vaccine name, date, batch and facility.",record3:"Diagnosis, treatment plan and follow-up.",emergencySection:"Emergency Medical Card",emergencyHint:"Keep visible and easy to share",critical:"Critical Information",conditions:"Important Conditions",emergencyContact:"Emergency Contact",relationship:"Relationship: Family",privacy:"Privacy reminder: for real-world use, do not expose full IDs, addresses or sensitive medical data on an unprotected static website. Add authentication, encryption and access control.",saved:"Emergency information is ready!"},
+ja:{subtitle:"多言語対応・携帯電子カルテ",print:"印刷",share:"緊急情報を共有",patient:"個人健康プロフィール",navOverview:"概要",navMedical:"病歴",navMedication:"薬",navRecords:"医療記録",navEmergency:"緊急情報",emergencyTitle:"⚠ 緊急情報",emergencyText:"まずアレルギー、慢性疾患、薬、緊急連絡先を確認してください。",verified:"● パーソナル・ヘルス・パスポート",welcome:"あなたの健康情報を、多言語でいつでも。",heroText:"重要な医療情報を一つのデジタルプロフィールにまとめ、海外の医療従事者にも迅速な理解を支援します。",viewEmergency:"緊急情報を見る",blood:"血液型",allergy:"重度のアレルギー",languageLabel:"現在の言語",updated:"最終更新",healthSummary:"健康サマリー",summaryHint:"医療従事者向けの概要",chronic:"慢性疾患",currentMed:"現在の服薬",familyRisk:"家族リスク",familyValue:"糖尿病・高血圧",medicalTitle:"健康情報",medicalHint:"公式な医療記録に基づき定期更新",personalInfo:"基本情報",demoPersonal:"氏名、生年月日、生物学的性別、国籍",demoContact:"電話、住所、緊急連絡先",demoIdentity:"パスポート／保険情報（任意）",allergyTitle:"アレルギー・不耐症",allergyNote:"薬、食物、ラテックスなどと反応を記録できます。",diseaseHistory:"疾病・診断歴",surgeryHistory:"手術・入院歴",hospitalNote:"日付、病院、麻酔、合併症を追加できます。",familyHistory:"家族歴",familyDetail:"両親、祖父母、兄弟姉妹の心血管疾患、がん、糖尿病など。",socialHistory:"生活・社会歴",socialDetail:"喫煙、飲酒、運動、職業、睡眠など医療に関係する情報。",extraTitle:"その他の推奨健康情報",vaccine:"予防接種",pregnancy:"妊娠・生殖歴",mental:"精神健康歴",device:"インプラント・医療機器",transfusion:"輸血歴",organ:"臓器提供の意思",advance:"事前医療決定",baseline:"身長・体重・バイタル",tests:"重要検査結果",medTitle:"服薬・医療記録",medHint:"重複・誤投薬の防止",currentMedication:"現在の定期薬",medFields:"推奨項目",medField1:"薬名、用量、頻度、目的",medField2:"開始・中止日と理由",medField3:"市販薬、サプリ、漢方",doctorInfo:"医療チーム",doctorDetail:"主治医、専門医、薬剤師、医療機関の連絡先。",recordTitle:"重要な医療記録",recordHint:"日付ごとのタイムライン",record1:"健康診断：主要な結果を要約。",record2:"ワクチン名、日付、ロット、医療機関。",record3:"診断、治療計画、フォローアップ。",emergencySection:"緊急医療カード",emergencyHint:"見やすく共有しやすい場所に",critical:"重要情報",conditions:"重要な疾患",emergencyContact:"緊急連絡先",relationship:"関係：家族",privacy:"プライバシー注意：実運用では、保護されていない静的サイトに住所や身分証番号などの機微情報を公開しないでください。認証、暗号化、アクセス制御を追加してください。",saved:"緊急情報の準備ができました！"},
+ko:{subtitle:"다국어 지원 휴대용 전자 건강기록",print:"인쇄",share:"응급 정보 공유",patient:"개인 건강 프로필",navOverview:"개요",navMedical:"병력",navMedication:"복약",navRecords:"의료 기록",navEmergency:"응급 정보",emergencyTitle:"⚠ 응급 정보",emergencyText:"알레르기, 만성질환, 복용약, 비상 연락처를 먼저 확인하세요.",verified:"● 개인 건강 패스포트",welcome:"언어를 넘어, 건강 정보를 언제나 함께.",heroText:"중요한 의료 정보를 하나의 디지털 프로필로 통합하여 해외 의료진도 빠르게 건강 상태를 이해할 수 있도록 돕습니다.",viewEmergency:"응급 정보 보기",blood:"혈액형",allergy:"중증 알레르기",languageLabel:"현재 언어",updated:"최종 업데이트",healthSummary:"건강 요약",summaryHint:"의료진을 위한 빠른 요약",chronic:"만성 질환",currentMed:"현재 복용약",familyRisk:"가족력 위험",familyValue:"당뇨병, 고혈압",medicalTitle:"전체 건강 정보",medicalHint:"공식 의료 문서를 기준으로 정기적으로 업데이트하세요",personalInfo:"개인 기본 정보",demoPersonal:"이름, 생년월일, 생물학적 성별, 국적",demoContact:"전화, 주소, 비상 연락처",demoIdentity:"여권 / 보험 정보 (선택)",allergyTitle:"알레르기 및 불내증",allergyNote:"약물, 음식, 라텍스 등의 알레르겐과 반응을 기록하세요.",diseaseHistory:"질병 / 진단 이력",surgeryHistory:"수술 및 입원 이력",hospitalNote:"날짜, 병원, 마취, 합병증을 추가할 수 있습니다.",familyHistory:"가족 병력",familyDetail:"부모, 조부모, 형제자매의 심혈관 질환, 암, 당뇨병 등.",socialHistory:"생활 및 사회력",socialDetail:"흡연, 음주, 운동, 직업, 수면 등 치료와 관련된 정보.",extraTitle:"추가 권장 건강 정보",vaccine:"예방접종",pregnancy:"임신 / 생식 이력",mental:"정신 건강 이력",device:"삽입물 / 의료기기",transfusion:"수혈 이력",organ:"장기기증 의사",advance:"사전 의료 결정",baseline:"키 / 체중 / 활력징후",tests:"중요 검사 결과",medTitle:"복약 및 의료 기록",medHint:"중복 또는 잘못된 투약 예방",currentMedication:"현재 정기 복용약",medFields:"권장 항목",medField1:"약명, 용량, 빈도, 목적",medField2:"시작 / 중단 날짜와 이유",medField3:"일반의약품, 건강보조제, 한약",doctorInfo:"의료팀",doctorDetail:"주치의, 전문의, 약사 및 의료기관 연락처.",recordTitle:"중요 의료 기록",recordHint:"날짜별 타임라인 구성",record1:"정기 건강검진: 주요 결과를 요약합니다.",record2:"백신명, 날짜, 제조번호, 접종 기관.",record3:"진단, 치료 계획 및 추적 관찰.",emergencySection:"응급 의료 카드",emergencyHint:"첫 화면에 표시하고 쉽게 공유하세요",critical:"핵심 정보",conditions:"중요 질환",emergencyContact:"비상 연락처",relationship:"관계: 가족",privacy:"개인정보 안내: 실제 서비스에서는 보호되지 않은 정적 웹사이트에 주소나 신분증 번호 등 민감한 의료 정보를 공개하지 마세요. 인증, 암호화, 접근 제어가 필요합니다.",saved:"응급 정보가 준비되었습니다!"},
+vi:{subtitle:"Hồ sơ sức khỏe cá nhân đa ngôn ngữ",print:"In",share:"Chia sẻ thông tin khẩn cấp",patient:"Hồ sơ sức khỏe cá nhân",navOverview:"Tổng quan",navMedical:"Tiền sử bệnh",navMedication:"Thuốc",navRecords:"Hồ sơ y tế",navEmergency:"Khẩn cấp",emergencyTitle:"⚠ Thông tin khẩn cấp",emergencyText:"Ưu tiên kiểm tra dị ứng, bệnh mạn tính, thuốc và liên hệ khẩn cấp.",verified:"● Hộ chiếu sức khỏe cá nhân",welcome:"Thông tin sức khỏe của bạn, luôn đồng hành bằng nhiều ngôn ngữ.",heroText:"Tập hợp thông tin y tế quan trọng trong một hồ sơ số duy nhất để nhân viên y tế ở các quốc gia khác nhau có thể nhanh chóng hiểu tình trạng sức khỏe của bạn.",viewEmergency:"Xem thông tin khẩn cấp",blood:"Nhóm máu",allergy:"Dị ứng nghiêm trọng",languageLabel:"Ngôn ngữ hiện tại",updated:"Cập nhật lần cuối",healthSummary:"Tóm tắt sức khỏe",summaryHint:"Tổng quan nhanh cho nhân viên y tế",chronic:"Bệnh mạn tính",currentMed:"Thuốc đang dùng",familyRisk:"Nguy cơ gia đình",familyValue:"Đái tháo đường, tăng huyết áp",medicalTitle:"Thông tin sức khỏe đầy đủ",medicalHint:"Nên cập nhật định kỳ theo hồ sơ y tế chính thức",personalInfo:"Thông tin cá nhân",demoPersonal:"Họ tên, ngày sinh, giới tính sinh học, quốc tịch",demoContact:"Điện thoại, địa chỉ, liên hệ khẩn cấp",demoIdentity:"Thông tin hộ chiếu / bảo hiểm (tùy chọn)",allergyTitle:"Dị ứng & Không dung nạp",allergyNote:"Ghi nhận thuốc, thực phẩm, latex và các chất gây dị ứng cùng phản ứng.",diseaseHistory:"Tiền sử bệnh / chẩn đoán",surgeryHistory:"Phẫu thuật & Nhập viện",hospitalNote:"Có thể thêm ngày, bệnh viện, gây mê và biến chứng.",familyHistory:"Tiền sử gia đình",familyDetail:"Bệnh quan trọng của cha mẹ, ông bà, anh chị em như tim mạch, ung thư hoặc đái tháo đường.",socialHistory:"Lối sống & Xã hội",socialDetail:"Hút thuốc, rượu, vận động, nghề nghiệp, giấc ngủ và các yếu tố liên quan.",extraTitle:"Thông tin sức khỏe khác nên bổ sung",vaccine:"Tiêm chủng",pregnancy:"Thai sản / Sinh sản",mental:"Tiền sử sức khỏe tâm thần",device:"Thiết bị / Cấy ghép y tế",transfusion:"Tiền sử truyền máu",organ:"Nguyện vọng hiến tạng",advance:"Quyết định y tế trước",baseline:"Chiều cao / Cân nặng / Dấu hiệu sinh tồn",tests:"Kết quả xét nghiệm quan trọng",medTitle:"Thuốc & Hồ sơ y tế",medHint:"Giúp tránh dùng thuốc trùng lặp hoặc sai",currentMedication:"Thuốc dùng thường xuyên",medFields:"Trường thông tin đề xuất",medField1:"Tên, liều, tần suất, mục đích",medField2:"Ngày bắt đầu / ngừng và lý do",medField3:"Thuốc không kê đơn, thực phẩm bổ sung, thảo dược",doctorInfo:"Đội ngũ y tế",doctorDetail:"Bác sĩ, chuyên khoa, dược sĩ và cơ sở y tế.",recordTitle:"Hồ sơ y tế quan trọng",recordHint:"Tạo dòng thời gian theo ngày",record1:"Khám sức khỏe định kỳ: tóm tắt các kết quả quan trọng.",record2:"Tên vắc-xin, ngày, lô và cơ sở tiêm.",record3:"Chẩn đoán, kế hoạch điều trị và theo dõi.",emergencySection:"Thẻ y tế khẩn cấp",emergencyHint:"Nên đặt ở trang đầu và dễ chia sẻ",critical:"Thông tin quan trọng",conditions:"Bệnh quan trọng",emergencyContact:"Liên hệ khẩn cấp",relationship:"Mối quan hệ: Gia đình",privacy:"Lưu ý riêng tư: khi sử dụng thực tế, không nên công khai số giấy tờ, địa chỉ hoặc dữ liệu y tế nhạy cảm trên website tĩnh không được bảo vệ. Hãy thêm xác thực, mã hóa và kiểm soát truy cập.",saved:"Thông tin khẩn cấp đã sẵn sàng!"}
+};
+const langNames={zh:"繁體中文",en:"English",ja:"日本語",ko:"한국어",vi:"Tiếng Việt"};
+let current="zh"; const t=k=>translations[current][k]||translations.en[k]||k;
+function applyLanguage(lang){current=lang;document.documentElement.lang=lang==="zh"?"zh-Hant":lang;document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));document.getElementById("currentLanguage").textContent=langNames[lang];}
+document.getElementById("language").addEventListener("change",e=>applyLanguage(e.target.value));
+document.querySelectorAll(".nav button").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.getElementById(btn.dataset.target).scrollIntoView({behavior:"smooth",block:"start"});}));
+applyLanguage("zh");
+</script>
+</body></html>
